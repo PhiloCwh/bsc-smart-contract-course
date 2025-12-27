@@ -374,9 +374,11 @@ contract GIGGLE is ERC20, Ownable {
 
     IUniswapV2Router02 public immutable uniswapV2Router;
     address public immutable uniswapV2Pair;
-
+    //
     mapping (address => bool) public isBot;
+    // 是否开启交易
     bool private _swapping;
+    // 可交易时间
     uint256 private _launchTime;
 
     address private devWallet;
@@ -416,7 +418,7 @@ contract GIGGLE is ERC20, Ownable {
  
     event devWalletUpdated(address indexed newWallet, address indexed oldWallet);
 
-    constructor() ERC20("Giggle Fund", "GIGGLE") {
+    constructor(uint256 _buyDevFee, uint256 _sellDevFee) ERC20("Giggle Fund", "GIGGLE") {
         IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x10ED43C718714eb63d5aA57B78B54704E256024E);
         
         excludeFromMaxTransaction(address(_uniswapV2Router), true);
@@ -428,9 +430,6 @@ contract GIGGLE is ERC20, Ownable {
 
 
 
-        uint256 _buyDevFee = 5;
- 
-        uint256 _sellDevFee = 5;
         
         uint256 totalSupply = 1 * 1e6 * 1e18;
         
@@ -566,7 +565,7 @@ contract GIGGLE is ERC20, Ownable {
             isBot[bots[i]] = false;
         }
     }
-
+    //核心
     function _transfer(
         address from,
         address to,
