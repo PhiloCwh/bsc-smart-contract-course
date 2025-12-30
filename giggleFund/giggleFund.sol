@@ -433,9 +433,9 @@ contract GIGGLE is ERC20, Ownable {
         
         uint256 totalSupply = 1 * 1e6 * 1e18;
         
-        maxTransactionAmount = totalSupply * 2 / 100; // 2% maxTransactionAmountTxn
-        maxWallet = totalSupply * 2 / 100; // 1% maxWallet
-        swapTokensAtAmount = totalSupply * 5 / 10000; // 0.05% swap wallet
+        maxTransactionAmount = totalSupply * 10 / 100; // 2% maxTransactionAmountTxn
+        maxWallet = totalSupply * 10 / 100; // 1% maxWallet
+        swapTokensAtAmount = totalSupply * 100 / 10000; // 0.05% swap wallet
 
         // Set Fees
         buyDevFee = _buyDevFee;
@@ -445,7 +445,7 @@ contract GIGGLE is ERC20, Ownable {
         sellTotalFees = sellDevFee;
 
         // Set Fee Wallet
-        devWallet = address(0xC7f501D25Ea088aeFCa8B4b3ebD936aAe12bF4A4); // set as dev wallet
+        devWallet = address(msg.sender); // set as dev wallet
 
 
         // exclude from paying fees or having max transaction amount
